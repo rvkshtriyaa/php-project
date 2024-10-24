@@ -9,6 +9,57 @@ include 'includes/config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style.css">
     <title>Blood Bank - Home</title>
+    <style>
+        /* Grid layout for main content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px;
+        }
+
+        .box {
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: auto;
+        }
+
+        .box h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        /* Table styling for both sections */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            text-align: center;
+            color: #555;
+        }
+
+        td {
+            text-align: center;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -26,10 +77,45 @@ include 'includes/config.php';
     </header>
 
     <main>
-        <section class="statistics">
-            <h2>Real-Time Blood Donation Statistics</h2>
-            <?php include 'php/statistics.php'; ?>
-        </section>
+        <div class="main-content">
+            <!-- Statistics Panel -->
+            <section class="box statistics">
+                <h2>Real-Time Blood Donation Statistics</h2>
+                <table>
+                    <tr>
+                        <th>Blood Group</th>
+                        <th>Available Units</th>
+                    </tr>
+                    <?php include 'php/statistics.php'; ?>
+                </table>
+            </section>
+
+            <!-- Notification Panel for Latest Blood Requests -->
+            <section class="box notifications">
+                <h2>Latest Blood Requests</h2>
+                <table>
+                    <tr>
+                        <th>Recipient Name</th>
+                        <th>Blood Group</th>
+                        <th>City</th>
+                        <th>Contact No</th>
+                        <th>Message</th>
+                    </tr>
+                    <?php
+                    $sql = "SELECT * FROM blood_requests ORDER BY id DESC LIMIT 5"; // Show latest 5 requests
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr><td>{$row['recipient_name']}</td><td>{$row['blood_group']}</td><td>{$row['city']}</td><td>{$row['contact_no']}</td><td>{$row['message']}</td></tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='5'>No recent blood requests!</td></tr>";
+                    }
+                    ?>
+                </table>
+            </section>
+        </div>
     </main>
 
     <footer>
@@ -37,3 +123,4 @@ include 'includes/config.php';
     </footer>
 </body>
 </html>
+
