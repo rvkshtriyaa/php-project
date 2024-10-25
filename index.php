@@ -80,8 +80,9 @@ include 'includes/config.php';
         <div class="main-content">
             <!-- Statistics Panel -->
             <section class="box statistics">
-                <h2>Real-Time Blood Donation Statistics</h2>
+               
                 <table>
+                <H1></H1>
                     <tr>
                         <th>Blood Group</th>
                         <th>Available Units</th>
