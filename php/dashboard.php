@@ -41,31 +41,99 @@ $total_camps = $result_total_camps->fetch_assoc()['total_camps'];
     <link rel="stylesheet" href="../assets/style.css">
     <title>Admin Dashboard</title>
     <style>
+        /* Body background with a semi-transparent overlay */
+        body {
+            background-image: url('../assets/blood.jpeg'); /* Ensure correct path */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Semi-transparent overlay for better readability */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        /* Header styling */
+        header {
+            text-align: center;
+            padding: 20px;
+            color: #ffffff;
+            background: rgba(34, 34, 34, 0.8); /* Dark grey with transparency */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 10px 0 0;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
         /* Main content layout */
         .dashboard-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            margin: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 1200px;
         }
 
         /* Box styling */
         .dashboard-box {
             padding: 20px;
-            border: 1px solid #ccc;
             border-radius: 8px;
-            background-color: #f9f9f9;
+            background-color: rgba(255, 255, 255, 0.85);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
         .dashboard-box h3 {
             margin-bottom: 15px;
-            color: #333;
+            color: #D32F2F;
+            font-size: 1.8em;
         }
 
         .dashboard-box p {
-            font-size: 18px;
+            font-size: 22px;
             margin: 5px 0;
             color: #555;
         }
@@ -78,7 +146,7 @@ $total_camps = $result_total_camps->fetch_assoc()['total_camps'];
 
         .home-button a {
             padding: 12px 30px;
-          
+            background-color: #D32F2F;
             color: white;
             text-decoration: none;
             border-radius: 30px;
@@ -91,6 +159,18 @@ $total_camps = $result_total_camps->fetch_assoc()['total_camps'];
         .home-button a:hover {
             background-color: #218838;
             transform: translateY(-3px);
+        }
+
+        /* Footer styling */
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: rgba(34, 34, 34, 0.8); /* Dark grey with transparency */
+            color: #ffffff;
+            font-size: 1em;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
         }
     </style>
 </head>
@@ -144,3 +224,4 @@ $total_camps = $result_total_camps->fetch_assoc()['total_camps'];
 
 </body>
 </html>
+

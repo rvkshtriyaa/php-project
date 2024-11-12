@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <li><a href="register.php">Donor Registration</a></li>
             <li><a href="blood_camps.php">Blood Camps</a></li>
             <li><a href="request_blood.php">Request Blood</a></li>
-            <li><a href="login.php">Donor Login</a></li>
+            
             <li><a href="admin_login.php">Admin Login</a></li>
         </ul>
     </nav>
