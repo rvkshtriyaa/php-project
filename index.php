@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="assets/style.css">
     <title>Blood Bank - Home</title>
     <style>
+
+        
         /* Body background with a semi-transparent overlay */
         body {
             background-image: url('assets/blood.jpeg'); /* Replace with the correct path */
@@ -136,6 +138,7 @@
     </style>
 </head>
 <body>
+    
     <header>
         <h1>BloodBuddy - An Online Blood Bank</h1>
         <nav>
@@ -192,9 +195,7 @@
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Online Blood Bank. All rights reserved.</p>
-    </footer>
+   
 </body>
 </html>
 

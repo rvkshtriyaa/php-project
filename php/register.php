@@ -127,6 +127,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             font-size: 16px;
             color: #333;
         }
+
+        /* Popup Modal Style */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .popup button {
+            background-color: #b22222;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            background-color: #900000;
+        }
     </style>
 </head>
 <body>
@@ -134,11 +169,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Add Navigation Bar -->
     <nav>
         <ul>
-        <li><a href="../index.php">Home</a></li>
+            <li><a href="../index.php">Home</a></li>
             <li><a href="find_donors.php">Find Donors</a></li>
             <li><a href="blood_camps.php">Blood Camps</a></li>
             <li><a href="request_blood.php">Request Blood</a></li>
-           
             <li><a href="admin_login.php">Admin Login</a></li>
         </ul>
     </nav>
@@ -148,7 +182,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h2>Donor Registration</h2>
         <form method="POST" action="register.php">
             <input type="text" name="name" placeholder="Full Name" required>
-            <label for="blood_group"></label>
             <select name="blood_group" required>
                 <option value="">Select Blood Group</option>
                 <option value="A+">A+</option>
@@ -174,6 +207,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <p class="error"><?php echo $error_message; ?></p>
         <?php endif; ?>
     </div>
+
+    <!-- Success Popup -->
+    <div id="successPopup" class="popup">
+        <div class="popup-content">
+            <h3>Success!</h3>
+            <p>Your registration was successful. Thank you for registering as a blood donor.</p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Check if the success message is set and show the popup
+        <?php if (isset($success_message)): ?>
+            window.onload = function() {
+                document.getElementById('successPopup').style.display = 'flex';
+            };
+        <?php endif; ?>
+
+        // Close the popup when clicking the button
+        function closePopup() {
+            document.getElementById('successPopup').style.display = 'none';
+        }
+    </script>
+
 </body>
 </html>
-
