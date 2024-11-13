@@ -13,8 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($conn->query($sql)) {
         $success_message = "Blood request submitted successfully!";
+        $show_popup = true;  // Flag to show the popup
     } else {
         $error_message = "Error: " . $conn->error;
+        $show_popup = false;
     }
 }
 ?>
@@ -127,6 +129,51 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             color: red;
             margin-top: 20px;
         }
+
+        /* Popup Style */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            z-index: 1000;
+            width: 300px;
+        }
+
+        .popup h3 {
+            margin-top: 0;
+            color: #b22222;
+        }
+
+        .popup button {
+            padding: 10px 20px;
+            background-color: #b22222;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            background-color: #900000;
+        }
+
+        /* Overlay behind the popup */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
@@ -134,11 +181,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Navigation Bar -->
     <nav>
         <ul>
-        <li><a href="../index.php">Home</a></li>
+            <li><a href="../index.php">Home</a></li>
             <li><a href="register.php">Donor Registration</a></li>
             <li><a href="find_donors.php">Find Donors</a></li>
             <li><a href="blood_camps.php">Blood Camps</a></li>
-            
             <li><a href="admin_login.php">Admin Login</a></li>
         </ul>
     </nav>
@@ -169,12 +215,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <textarea name="message" required></textarea>
             <button type="submit">Submit Request</button>
         </form>
+
         <?php if (isset($success_message)): ?>
             <p class="success"><?php echo $success_message; ?></p>
         <?php elseif (isset($error_message)): ?>
             <p class="error"><?php echo $error_message; ?></p>
         <?php endif; ?>
     </div>
+
+    <!-- Popup Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Popup Message -->
+    <div class="popup" id="popup">
+        <h3>Request Submitted Successfully!</h3>
+        <p><strong>Recipient:</strong> <?php echo htmlspecialchars($recipient_name); ?></p>
+        <p><strong>Blood Group:</strong> <?php echo htmlspecialchars($blood_group); ?></p>
+        <p><strong>City:</strong> <?php echo htmlspecialchars($city); ?></p>
+        <p><strong>Contact No:</strong> <?php echo htmlspecialchars($contact_no); ?></p>
+        <p><strong>Message:</strong> <?php echo htmlspecialchars($message); ?></p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <!-- JavaScript Section -->
+    <script>
+        // Show popup if request was successful
+        <?php if (isset($show_popup) && $show_popup): ?>
+            document.getElementById("popup").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        <?php endif; ?>
+
+        // Close the popup
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
 </body>
 </html>
-
